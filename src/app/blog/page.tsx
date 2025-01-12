@@ -7,6 +7,7 @@ import {
   CardDescription,
 } from "@/components/ui/card"
 import { microCMSClient } from "@/lib/microcms"
+import { DateUtility } from "@/lib/utilities/DateUtility"
 import { Blog, BlogInfo } from "@/types/blog"
 import { Post } from "@/types/post"
 import { GetRequest, MicroCMSListResponse } from "microcms-js-sdk"
@@ -31,17 +32,14 @@ export default async function BlogPage() {
                   </span>
                 </CardTitle>
                 <CardDescription>
-                  <span>作成日</span>
-                  {blog.createdAt}
+                  作成日:{" "}
+                  {DateUtility.convertISO8601ToFormattedDate(blog.createdAt)} /
+                  最終更新日:{" "}
+                  {DateUtility.convertISO8601ToFormattedDate(blog.updatedAt)}
                 </CardDescription>
               </CardHeader>
 
-              <CardContent>
-                {/* <p>
-                <span>作成日</span>
-                {blog.createdAt}
-              </p> */}
-              </CardContent>
+              <CardContent />
             </Card>
           </Link>
         ))}
