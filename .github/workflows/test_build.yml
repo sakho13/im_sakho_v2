@@ -1,0 +1,36 @@
+name: Build Test
+
+env:
+  SERVICE_DOMAIN: ${{ secrets.SERVICE_DOMAIN }}
+  API_KEY: ${{ secrets.API_KEY }}
+
+on:
+  push:
+    branches-ignore:
+      - main
+  pull_request:
+    types: [opened, reopened, synchronize, ready_for_review]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: ./package.json
+          cache: "npm"
+          cache-dependency-path: "./package-lock.json"
+
+      - name: Install dependencies
+        working-directory: ./
+        run: npm ci
+
+      - name: Run builds
+        working-directory: ./
+        run: npm run build
