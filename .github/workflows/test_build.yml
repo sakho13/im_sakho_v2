@@ -5,11 +5,6 @@ env:
   API_KEY: ${{ secrets.API_KEY }}
 
 on:
-  push:
-    branches-ignore:
-      - main
-    branches:
-      - develop
   pull_request:
     types: [opened, reopened, synchronize, ready_for_review]
   workflow_dispatch:
