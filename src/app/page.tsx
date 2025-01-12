@@ -1,101 +1,113 @@
-import Image from "next/image";
+import { SimpleTemplate } from "@/components/templates/SimpleTemplate"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import Link from "next/link"
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const careerer = [
+    {
+      span: "2024/07 - now",
+      text: "株式会社OMS(旧 株式会社大宮商会)",
+    },
+    {
+      span: "2024/04 - 2024/06",
+      text: "株式会社モビテック",
+    },
+    {
+      span: "2021/08 - 2024/03",
+      text: "株式会社大宮商会",
+    },
+    {
+      span: "2021/04 - 2024/03",
+      text: "東京理科大学 理学部 物理学科 / Department of Physics, Faculty of Science, Tokyo University of Science",
+    },
+    {
+      span: "2016/04 - 2021/03",
+      text: "東京都立産業技術高等専門学校 電子情報工学コース / Tokyo Metropolitan College of Industrial Technology",
+    },
+  ]
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+  return (
+    <SimpleTemplate title='Top'>
+      <div className='select-none grid lg:grid-cols-2 grid-cols-1 gap-2'>
+        <Card className='h-fit'>
+          <CardHeader className='pb-2'>
+            <CardTitle className='text-xl'>Profile</CardTitle>
+          </CardHeader>
+
+          <CardContent className='mx-2 text-gray-700'>
+            <p className='text-lg'>
+              <span className='font-bold'>Name: </span>
+              SaKho
+            </p>
+
+            <p>
+              <span className='font-bold'>Location: </span>
+              Tokyo, Japan
+            </p>
+
+            <p>
+              <span className='font-bold'>Skills: </span>
+              JavaScript, TypeScript, React, Next.js, Vue.js, Node.js,
+              Express.js, C
+            </p>
+
+            <p>
+              <span className='font-bold'>License: </span>
+              基本情報技術者(FE), 普通自動車第一種免許(AT), 普通自動二輪免許
+            </p>
+
+            <p>
+              <span className='font-bold'>GitHub: </span>
+              <Link
+                href={"https://github.com/sakho13"}
+                target='_blank'
+                className='hover:underline'
+              >
+                here
+              </Link>
+            </p>
+
+            <p>
+              <span className='font-bold'>YouTube: </span>
+              <Link
+                href={
+                  "https://www.youtube.com/channel/UCfIemfzMpKiNJHjYatg7MXg"
+                }
+                target='_blank'
+                className='hover:underline'
+              >
+                here
+              </Link>
+            </p>
+
+            <p>
+              <span className='font-bold'>Qiita: </span>
+              <Link
+                href={"https://qiita.com/SaKho13"}
+                target='_blank'
+                className='hover:underline'
+              >
+                here
+              </Link>
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card className='h-fit'>
+          <CardHeader className='pb-2'>
+            <CardTitle className='text-xl'>Careerer</CardTitle>
+
+            <CardContent className='mx-2 text-gray-700'>
+              {careerer.map((c) => (
+                <p key={c.span} className='mb-2 flex flex-col'>
+                  <span className='font-bold'>{c.span}</span>
+                  <span className='ml-1'>{c.text}</span>
+                </p>
+              ))}
+            </CardContent>
+          </CardHeader>
+        </Card>
+      </div>
+    </SimpleTemplate>
+  )
 }
