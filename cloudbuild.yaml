@@ -1,0 +1,29 @@
+steps:
+  - name: "gcr.io/cloud-builders/docker"
+    entrypoint: "bash"
+    args:
+      - "-c"
+      - |
+        echo "SERVICE_DOMAIN=${_SERVICE_DOMAIN}" >> .env
+        echo "API_KEY=${_API_KEY}" >> .env
+
+        docker build -f Dockerfile -t gcr.io/$PROJECT_ID/im-sakho-v2:$COMMIT_SHA .
+
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["push", "gcr.io/$PROJECT_ID/im-sakho-v2:$COMMIT_SHA"]
+
+  - name: "gcr.io/cloud-builders/gcloud"
+    args:
+      - "run"
+      - "deploy"
+      - "im-sakho-v2"
+      - "--image"
+      - "gcr.io/$PROJECT_ID/im-sakho-v2:$COMMIT_SHA"
+      - "--region"
+      - "asia-northeast1"
+images:
+  - "gcr.io/$PROJECT_ID/im-sakho-v2:$COMMIT_SHA"
+timeout: 900s
+
+options:
+  logging: CLOUD_LOGGING_ONLY
