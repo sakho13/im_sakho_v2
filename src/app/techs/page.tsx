@@ -65,12 +65,12 @@ export default function Page() {
       description: "シンプルなCMSサービス。",
       link: "https://microcms.io/",
     },
-    // {
-    //   id: "gcp",
-    //   icon: <Wrench />,
-    //   name: "Google Cloud Platform",
-    //   description: "Googleのクラウドサービス。デプロイ環境とCI/CDに使用。",
-    // },
+    {
+      id: "gcp",
+      icon: <Wrench />,
+      name: "Google Cloud Platform",
+      description: "Googleのクラウドサービス。デプロイ環境とCI/CDに使用。",
+    },
   ]
 
   return (
