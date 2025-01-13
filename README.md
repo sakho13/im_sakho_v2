@@ -1,5 +1,7 @@
 # About
 
+リリース: <https://sakho.jp/>
+
 ## 使用技術
 
 - Next.js
