@@ -14,6 +14,7 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar"
 import { StrictMode } from "react"
+import Script from "next/script"
 import { BookText, Gavel, Wrench } from "lucide-react"
 import Link from "next/link"
 import { GitHubIcon } from "@/components/atoms/GitHubIcon"
@@ -29,9 +30,28 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const GA_ID = process.env.GA_ID
+
   return (
     <html lang='ja' suppressHydrationWarning>
-      <head />
+      <head>
+        {GA_ID ? (
+          <>
+            <Script
+              async
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+            />
+            <Script id='ga' defer strategy='afterInteractive'>
+              {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${GA_ID}');
+            `}
+            </Script>
+          </>
+        ) : null}
+      </head>
 
       <body
         className={`h-screen w-screen overflow-y-auto overflow-x-hidden font-mono`}
