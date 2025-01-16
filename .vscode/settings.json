@@ -17,5 +17,14 @@
   "[javascriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "cSpell.words": ["eyecatch", "katex", "microcms", "Qiita", "shadcn"]
+  "cSpell.words": [
+    "addgroup",
+    "adduser",
+    "eyecatch",
+    "katex",
+    "microcms",
+    "nextjs",
+    "Qiita",
+    "shadcn"
+  ]
 }
