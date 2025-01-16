@@ -1,0 +1,83 @@
+.content {
+  user-select: none;
+
+  h1 {
+    position: relative;
+    padding: 0.25em 1em;
+    border-bottom: double 1px gray;
+    margin-bottom: 1em;
+    font-size: x-large;
+    font-weight: bolder;
+  }
+
+  h2 {
+    position: relative;
+    padding: 0.25em 1em;
+    border-bottom: solid 0.5px gray;
+    margin-bottom: 1em;
+    font-size: larger;
+    font-weight: bold;
+  }
+
+  h3 {
+    position: relative;
+    padding: 0.25em 1em;
+    border-bottom: solid 0.5px gray;
+    margin-bottom: 1em;
+    font-size: large;
+    font-weight: bold;
+  }
+
+  h4 {
+    position: relative;
+    padding: 0.25em 1em;
+    border-bottom: dotted 0.5px gray;
+    margin-bottom: 1em;
+    font-size: medium;
+    font-weight: bold;
+  }
+
+  h5 {
+    position: relative;
+    padding: 0.25em 1em;
+    border-bottom: dashed 1px gray;
+    margin-bottom: 1em;
+    font-size: small;
+    font-weight: bold;
+  }
+
+  p {
+    text-align: start;
+    padding-left: 1em;
+    padding-right: 1em;
+
+    img {
+      margin: 0 auto;
+    }
+  }
+
+  ul,
+  ol {
+    list-style: "・";
+    color: #1e366a;
+    border: dotted #1e366a 1px; /*ドット 色 太さ*/
+    padding: 0.5em 0.5em 0.5em 2em;
+    margin: 1em 2em 1em 2em;
+  }
+
+  ul li,
+  ol li {
+    line-height: 1.5;
+    padding: 0.5em 0;
+  }
+
+  a {
+    color: #3b5ea8;
+    text-decoration: underline;
+  }
+
+  a:hover {
+    color: #1e366a;
+    text-decoration: underline;
+  }
+}
