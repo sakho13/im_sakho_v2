@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { IterationCcw } from "lucide-react"
+import { BracesIcon, IterationCcw } from "lucide-react"
 import Link from "next/link"
 
 type ToolType = {
@@ -25,11 +25,17 @@ export default function Page() {
       name: "URL encode",
       description: "encodes a string to be used in a URL",
     },
+    {
+      id: "reformat-json",
+      icon: <BracesIcon />,
+      name: "Reformat JSON",
+      description: "reformat JSON text with a specified space",
+    },
   ]
 
   return (
     <SimpleTemplate title='Tools'>
-      <div className='grid lg:grid-cols-4 grid-cols-1'>
+      <div className='grid lg:grid-cols-4 grid-cols-1 gap-2'>
         {tools.map((tool) => (
           <div key={tool.id}>
             <Card>
