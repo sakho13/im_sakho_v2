@@ -5,12 +5,12 @@ export class DateUtility {
    * @returns Asia/Tokyoでの年月日
    */
   public static convertISO8601ToFormattedDate(raw: string | undefined): string {
-    if (raw === undefined) {
-      return "9999年12年31日"
-    }
+    if (raw === undefined) return "9999年12月31日"
 
     const date = new Date(raw)
     const year = date.getFullYear()
+    if (isNaN(year)) return "9999年12月31日"
+
     const month = (date.getMonth() + 1).toString().padStart(2, "0")
     const day = date.getDate().toString().padStart(2, "0")
     return `${year}年${month}月${day}日`

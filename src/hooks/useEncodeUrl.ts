@@ -1,22 +1,13 @@
-import { useState } from "react"
+import { useOnChangeTextHook } from "./base/useOnChangeTextHook"
 
 export function useEncodeUrl() {
-  const [text, setText] = useState("")
-  const [encoded, setEncoded] = useState("")
-
-  const onChangeText = (value: string) => {
-    setText(value)
-
-    try {
-      setEncoded(encodeURIComponent(value))
-    } catch {
-      setEncoded("")
-    }
-  }
+  const { before, after, onChangeText } = useOnChangeTextHook({
+    onChangeFunction: (value) => encodeURIComponent(value),
+  })
 
   return {
-    text,
-    encoded,
+    text: before,
+    encoded: after,
     onChangeText,
   }
 }
