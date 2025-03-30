@@ -31,6 +31,12 @@ export default function Page() {
       name: "Reformat JSON",
       description: "reformat JSON text with a specified space",
     },
+    {
+      id: "convert-json-yaml",
+      icon: <BracesIcon />,
+      name: "Convert JSON ↔ YAML",
+      description: "convert JSON to YAML or YAML to JSON",
+    },
   ]
 
   return (
