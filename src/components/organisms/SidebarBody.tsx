@@ -13,6 +13,28 @@ import {
 } from "@/components/ui/sidebar"
 import { GitHubIcon } from "@/components/atoms/GitHubIcon"
 
+type SidebarMenuItem = {
+  id: string
+  label: string
+  icon: React.ReactNode
+  href: string
+}
+
+const SidebarMenuItems: SidebarMenuItem[] = [
+  {
+    id: "blog",
+    label: "Blog",
+    icon: <BookText />,
+    href: "/blog",
+  },
+  {
+    id: "tools",
+    label: "Tools",
+    icon: <Gavel />,
+    href: "/tools",
+  },
+]
+
 export function SidebarBody() {
   return (
     <>
@@ -28,23 +50,16 @@ export function SidebarBody() {
 
           <SidebarGroupContent>
             <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild>
-                  <a href={"/blog"}>
-                    <BookText />
-                    <span>Blog</span>
-                  </a>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild>
-                  <a href={"/tools"}>
-                    <Gavel />
-                    <span>Tools</span>
-                  </a>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
+              {SidebarMenuItems.map((item) => (
+                <SidebarMenuItem key={item.id}>
+                  <SidebarMenuButton asChild>
+                    <Link href={item.href}>
+                      {item.icon}
+                      <span>{item.label}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
