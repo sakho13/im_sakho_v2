@@ -143,6 +143,24 @@ describe("hooks/useConvertJsonYaml", () => {
     expect(result.current.error).toEqual("変換に失敗しました")
   })
 
+  test("空文字列を渡す", () => {
+    const { result } = renderHook(() => useConvertJsonYaml())
+
+    expect(result.current.mode).toEqual("to-yaml")
+    expect(result.current.text).toEqual("")
+    expect(result.current.converted).toEqual("")
+    expect(result.current.error).toEqual(null)
+
+    act(() => {
+      result.current.onChangeText("")
+    })
+
+    expect(result.current.mode).toEqual("to-yaml")
+    expect(result.current.text).toEqual("")
+    expect(result.current.converted).toEqual("")
+    expect(result.current.error).toEqual(null)
+  })
+
   describe("YAMLへ変換", () => {
     test("先頭に改行", () => {
       const { result } = renderHook(() => useConvertJsonYaml())
