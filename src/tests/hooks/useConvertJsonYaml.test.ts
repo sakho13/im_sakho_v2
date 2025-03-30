@@ -115,7 +115,6 @@ describe("hooks/useConvertJsonYaml", () => {
       `{"name":"John","age":30,"city":"New York"`,
     )
     expect(result.current.converted).toEqual("")
-    expect(result.current.converted).toEqual("")
     expect(result.current.error).toEqual("変換に失敗しました")
   })
 
