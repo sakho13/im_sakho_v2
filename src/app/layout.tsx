@@ -1,4 +1,7 @@
 import type { Metadata } from "next"
+import { StrictMode } from "react"
+import Script from "next/script"
+import Link from "next/link"
 import {
   Sidebar,
   SidebarContent,
@@ -13,10 +16,8 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
-import { StrictMode } from "react"
-import Script from "next/script"
+import { Toaster } from "@/components/ui/sonner"
 import { BookText, Gavel, Wrench } from "lucide-react"
-import Link from "next/link"
 import { GitHubIcon } from "@/components/atoms/GitHubIcon"
 import "./globals.css"
 
@@ -139,6 +140,8 @@ export default function RootLayout({
               <SidebarTrigger />
 
               {children}
+
+              <Toaster richColors />
             </main>
           </SidebarProvider>
         </StrictMode>

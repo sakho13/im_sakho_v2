@@ -31,11 +31,17 @@ export default function Page() {
       name: "Reformat JSON",
       description: "reformat JSON text with a specified space",
     },
+    {
+      id: "convert-json-yaml",
+      icon: <BracesIcon />,
+      name: "Convert JSON ↔ YAML",
+      description: "convert JSON to YAML or YAML to JSON",
+    },
   ]
 
   return (
     <SimpleTemplate title='Tools'>
-      <div className='grid lg:grid-cols-4 grid-cols-1 gap-2'>
+      <div className='grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-2'>
         {tools.map((tool) => (
           <div key={tool.id}>
             <Card>
