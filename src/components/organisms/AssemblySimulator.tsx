@@ -5,10 +5,15 @@ export function AssemblySimulator() {
   const { code, onChangeCode } = useAssembly()
 
   return (
-    <div id='assembly-simulator'>
-      <CodeEditor code={code} onChangeCode={onChangeCode} />
+    <div id='assembly-simulator' className='grid gap-y-4'>
+      <div className='mx-4'>
+        <p className='pb-2 font-bold select-none'>CodeEditor</p>
+        <CodeEditor code={code} onChangeCode={onChangeCode} />
+      </div>
 
-      <div></div>
+      <div className='mx-4'>
+        <p className='pb-2 font-bold select-none'>Output</p>
+      </div>
     </div>
   )
 }
