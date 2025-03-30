@@ -22,7 +22,9 @@ export function SidebarBody() {
 
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Contents</SidebarGroupLabel>
+          <SidebarGroupLabel className='select-none'>
+            Contents
+          </SidebarGroupLabel>
 
           <SidebarGroupContent>
             <SidebarMenu>
@@ -48,7 +50,7 @@ export function SidebarBody() {
         </SidebarGroup>
 
         <SidebarGroup>
-          <SidebarGroupLabel>Links</SidebarGroupLabel>
+          <SidebarGroupLabel className='select-none'>Links</SidebarGroupLabel>
 
           <SidebarGroupContent>
             <SidebarMenu>
@@ -65,7 +67,7 @@ export function SidebarBody() {
         </SidebarGroup>
 
         <SidebarGroup>
-          <SidebarGroupLabel>Other</SidebarGroupLabel>
+          <SidebarGroupLabel className='select-none'>Other</SidebarGroupLabel>
 
           <SidebarGroupContent>
             <SidebarMenu>
