@@ -14,6 +14,15 @@ export function useConvertJsonYaml() {
   }
 
   const onChangeText = (value: string) => {
+    if (value === text) return
+
+    if (value === "") {
+      setConverted("")
+      setError(null)
+      setText("")
+      return
+    }
+
     setText(value)
     try {
       onConvert(value)
