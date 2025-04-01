@@ -1,12 +1,7 @@
+import { TopicListViewer } from "@/components/molecules/TopicListViewer"
 import { SimpleTemplate } from "@/components/templates/SimpleTemplate"
 import { Button } from "@/components/ui/button"
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
+import { CardTitle } from "@/components/ui/card"
 import { BracesIcon, IterationCcw } from "lucide-react"
 import Link from "next/link"
 
@@ -41,30 +36,21 @@ export default function Page() {
 
   return (
     <SimpleTemplate title='Tools'>
-      <div className='grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-2'>
-        {tools.map((tool) => (
-          <div key={tool.id}>
-            <Card>
-              <CardHeader>
-                <CardTitle className='select-none flex items-center'>
-                  {tool.icon}
-                  <span className='ml-2'>{tool.name}</span>
-                </CardTitle>
-              </CardHeader>
-
-              <CardContent className='select-none text-gray-500'>
-                {tool.description}
-              </CardContent>
-
-              <CardFooter className='flex justify-end'>
-                <Button>
-                  <Link href={`/tools/${tool.id}`}>Link</Link>
-                </Button>
-              </CardFooter>
-            </Card>
-          </div>
-        ))}
-      </div>
+      <TopicListViewer
+        list={tools}
+        renderHeader={(tool) => (
+          <CardTitle className='select-none flex items-center'>
+            {tool.icon}
+            <span className='ml-2'>{tool.name}</span>
+          </CardTitle>
+        )}
+        renderBody={(tool) => tool.description}
+        renderFooter={(tool) => (
+          <Button>
+            <Link href={`/tools/${tool.id}`}>Link</Link>
+          </Button>
+        )}
+      />
     </SimpleTemplate>
   )
 }

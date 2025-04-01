@@ -1,13 +1,8 @@
 import { NextJsIcon } from "@/components/atoms/NextJsIcon"
+import { TopicListViewer } from "@/components/molecules/TopicListViewer"
 import { SimpleTemplate } from "@/components/templates/SimpleTemplate"
 import { Button } from "@/components/ui/button"
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
+import { CardTitle } from "@/components/ui/card"
 import { Gavel, Wrench } from "lucide-react"
 import Link from "next/link"
 
@@ -75,34 +70,25 @@ export default function Page() {
 
   return (
     <SimpleTemplate title='Techs'>
-      <div className='grid lg:grid-cols-4 grid-cols-1 gap-2'>
-        {tools.map((tool) => (
-          <div key={tool.id}>
-            <Card>
-              <CardHeader>
-                <CardTitle className='select-none flex items-center'>
-                  {tool.icon}
-                  <span className='ml-2'>{tool.name}</span>
-                </CardTitle>
-              </CardHeader>
-
-              <CardContent className='select-none text-gray-500'>
-                {tool.description}
-              </CardContent>
-
-              <CardFooter className='flex justify-end'>
-                {tool.link && (
-                  <Button>
-                    <Link href={tool.link} target='_blank'>
-                      Link
-                    </Link>
-                  </Button>
-                )}
-              </CardFooter>
-            </Card>
-          </div>
-        ))}
-      </div>
+      <TopicListViewer
+        list={tools}
+        renderHeader={(tool) => (
+          <CardTitle className='select-none flex items-center'>
+            {tool.icon}
+            <span className='ml-2'>{tool.name}</span>
+          </CardTitle>
+        )}
+        renderBody={(tool) => tool.description}
+        renderFooter={(tool) =>
+          tool.link && (
+            <Button>
+              <Link href={tool.link} target='_blank'>
+                Link
+              </Link>
+            </Button>
+          )
+        }
+      />
     </SimpleTemplate>
   )
 }
