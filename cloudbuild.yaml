@@ -7,7 +7,7 @@ steps:
         echo "SERVICE_DOMAIN=${_SERVICE_DOMAIN}" >> .env
         echo "API_KEY=${_API_KEY}" >> .env
         echo "DEVELOP=${_DEVELOP}" >> .env
-        echo "GA_ID=${_GA_ID}" >> .env
+        echo "NEXT_PUBLIC_GA_ID=${_GA_ID}" >> .env
 
         docker build -f Dockerfile -t gcr.io/$PROJECT_ID/im-sakho-v2:$COMMIT_SHA .
 
