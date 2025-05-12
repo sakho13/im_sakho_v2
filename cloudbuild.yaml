@@ -23,6 +23,7 @@ steps:
       - "gcr.io/$PROJECT_ID/im-sakho-v2:$COMMIT_SHA"
       - "--region"
       - "asia-northeast1"
+      - "--no-traffic"
 images:
   - "gcr.io/$PROJECT_ID/im-sakho-v2:$COMMIT_SHA"
 timeout: 900s
