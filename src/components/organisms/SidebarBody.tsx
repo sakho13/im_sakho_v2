@@ -1,5 +1,9 @@
+"use client"
+
 import { BookText, Gavel, Wrench } from "lucide-react"
 import Link from "next/link"
+import { redirect } from "next/navigation"
+import { event } from "@/lib/gtag"
 import {
   SidebarContent,
   SidebarFooter,
@@ -30,7 +34,17 @@ export function SidebarBody() {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <a href={"/blog"}>
+                  <a
+                    onClick={() => {
+                      event({
+                        action: "click",
+                        category: "sidebar",
+                        label: "blog",
+                      })
+                      redirect("/blog")
+                    }}
+                    className='hover:cursor-pointer'
+                  >
                     <BookText />
                     <span>Blog</span>
                   </a>
@@ -39,7 +53,17 @@ export function SidebarBody() {
 
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <a href={"/tools"}>
+                  <a
+                    onClick={() => {
+                      event({
+                        action: "click",
+                        category: "sidebar",
+                        label: "tools",
+                      })
+                      redirect("/tools")
+                    }}
+                    className='hover:cursor-pointer'
+                  >
                     <Gavel />
                     <span>Tools</span>
                   </a>
@@ -73,7 +97,17 @@ export function SidebarBody() {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <a href={"/techs"}>
+                  <a
+                    className='hover:cursor-pointer'
+                    onClick={() => {
+                      event({
+                        action: "click",
+                        category: "sidebar",
+                        label: "used-techs",
+                      })
+                      redirect("/techs")
+                    }}
+                  >
                     <Wrench />
                     <span>UsedTechs</span>
                   </a>
