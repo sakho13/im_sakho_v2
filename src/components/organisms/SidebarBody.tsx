@@ -2,7 +2,7 @@
 
 import { BookText, Gavel, Wrench } from "lucide-react"
 import Link from "next/link"
-import { redirect } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { event } from "@/lib/gtag"
 import {
   SidebarContent,
@@ -18,6 +18,8 @@ import {
 import { GitHubIcon } from "@/components/atoms/GitHubIcon"
 
 export function SidebarBody() {
+  const router = useRouter()
+
   return (
     <>
       <SidebarHeader className='select-none font-bold px-8 text-lg'>
@@ -41,7 +43,7 @@ export function SidebarBody() {
                         category: "sidebar",
                         label: "blog",
                       })
-                      redirect("/blog")
+                      router.push("/blog")
                     }}
                     className='hover:cursor-pointer'
                   >
@@ -60,7 +62,7 @@ export function SidebarBody() {
                         category: "sidebar",
                         label: "tools",
                       })
-                      redirect("/tools")
+                      router.push("/tools")
                     }}
                     className='hover:cursor-pointer'
                   >
@@ -105,7 +107,7 @@ export function SidebarBody() {
                         category: "sidebar",
                         label: "used-techs",
                       })
-                      redirect("/techs")
+                      router.push("/techs")
                     }}
                   >
                     <Wrench />
