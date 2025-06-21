@@ -20,26 +20,39 @@ export default async function BlogPage() {
 
   return (
     <SimpleTemplate title='Contents'>
-      <div className='grid lg:grid-cols-1 grid-cols-1 gap-2'>
+      <div className='grid lg:grid-cols-2  grid-cols-1 gap-2'>
         {blogs.map((blog) => (
           <Link key={blog.id} href={`/blog/${blog.id}`}>
-            <Card className=''>
+            <Card className='hover:shadow-lg transition-shadow duration-300'>
               <CardHeader>
-                <CardTitle className='select-none flex items-center'>
+                <CardTitle className='select-none flex items-center line-clamp-2'>
                   <span>
                     {blog.icon}
-                    <span className='ml-2'>{blog.title}</span>
+                    <span className='ml-2 leading-6'>{blog.title}</span>
                   </span>
                 </CardTitle>
                 <CardDescription>
-                  作成日:{" "}
-                  {DateUtility.convertISO8601ToFormattedDate(blog.createdAt)} /
-                  最終更新日:{" "}
-                  {DateUtility.convertISO8601ToFormattedDate(blog.updatedAt)}
+                  <p>
+                    作成日:{" "}
+                    {DateUtility.convertISO8601ToFormattedDate(blog.createdAt)}{" "}
+                  </p>
+                  <p>
+                    最終更新日:{" "}
+                    {DateUtility.convertISO8601ToFormattedDate(blog.updatedAt)}
+                  </p>
                 </CardDescription>
               </CardHeader>
 
-              <CardContent />
+              <CardContent>
+                {blog.category.map((c) => (
+                  <span
+                    key={`${blog.id}-${c.id}`}
+                    className='rounded-full bg-gray-200 px-2 py-1 text-sm font-semibold text-gray-700 mr-2'
+                  >
+                    {c.name}
+                  </span>
+                ))}
+              </CardContent>
             </Card>
           </Link>
         ))}
