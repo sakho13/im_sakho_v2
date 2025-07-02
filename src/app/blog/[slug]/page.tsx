@@ -36,29 +36,6 @@ export default async function Page({ params }: Props) {
       </div>
 
       <div className='mt-4 mb-16 mx-2'>
-        <link
-          rel='stylesheet'
-          href='https://cdn.jsdelivr.net/npm/katex@0.16.19/dist/katex.min.css'
-          integrity='sha384-7lU0muIg/i1plk7MgygDUp3/bNRA65orrBub4/OSWHECgwEsY83HaS1x3bljA/XV'
-          crossOrigin='anonymous'
-        />
-
-        <script
-          defer
-          src='https://cdn.jsdelivr.net/npm/katex@0.16.19/dist/katex.min.js'
-          integrity='sha384-RdymN7NRJ+XoyeRY4185zXaxq9QWOOx3O7beyyrRK4KQZrPlCDQQpCu95FoCGPAE'
-          crossOrigin='anonymous'
-        ></script>
-
-        <script
-          defer
-          src='https://cdn.jsdelivr.net/npm/katex@0.16.19/dist/contrib/auto-render.min.js'
-          integrity='sha384-hCXGrW6PitJEwbkoStFjeJxv+fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh'
-          crossOrigin='anonymous'
-        >
-          renderMathInElement(document.body)
-        </script>
-
         <div
           className={post_style.content}
           dangerouslySetInnerHTML={{ __html: blog.content }}
