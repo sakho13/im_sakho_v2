@@ -1,5 +1,9 @@
+"use client"
+
 import { BookText, Gavel, Wrench } from "lucide-react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { event } from "@/lib/gtag"
 import {
   SidebarContent,
   SidebarFooter,
@@ -14,6 +18,8 @@ import {
 import { GitHubIcon } from "@/components/atoms/GitHubIcon"
 
 export function SidebarBody() {
+  const router = useRouter()
+
   return (
     <>
       <SidebarHeader className='select-none font-bold px-8 text-lg'>
@@ -30,7 +36,17 @@ export function SidebarBody() {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <a href={"/blog"}>
+                  <a
+                    onClick={() => {
+                      event({
+                        action: "click",
+                        category: "sidebar",
+                        label: "blog",
+                      })
+                      router.push("/blog")
+                    }}
+                    className='hover:cursor-pointer'
+                  >
                     <BookText />
                     <span>Blog</span>
                   </a>
@@ -39,7 +55,17 @@ export function SidebarBody() {
 
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <a href={"/tools"}>
+                  <a
+                    onClick={() => {
+                      event({
+                        action: "click",
+                        category: "sidebar",
+                        label: "tools",
+                      })
+                      router.push("/tools")
+                    }}
+                    className='hover:cursor-pointer'
+                  >
                     <Gavel />
                     <span>Tools</span>
                   </a>
@@ -73,7 +99,17 @@ export function SidebarBody() {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <a href={"/techs"}>
+                  <a
+                    className='hover:cursor-pointer'
+                    onClick={() => {
+                      event({
+                        action: "click",
+                        category: "sidebar",
+                        label: "used-techs",
+                      })
+                      router.push("/techs")
+                    }}
+                  >
                     <Wrench />
                     <span>UsedTechs</span>
                   </a>

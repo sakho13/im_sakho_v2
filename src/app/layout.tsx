@@ -7,7 +7,9 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar"
 import { Toaster } from "@/components/ui/sonner"
+import { GoogleAnalytics } from "@/components/molecules/GoogleAnalytics"
 import { SidebarBody } from "@/components/organisms/SidebarBody"
+import { GA_ID } from "@/lib/gtag"
 import "./globals.css"
 
 export const metadata: Metadata = {
@@ -20,8 +22,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const GA_ID = process.env.GA_ID
-
   return (
     <html lang='ja' suppressHydrationWarning>
       <head>
@@ -83,6 +83,8 @@ export default function RootLayout({
               <Toaster richColors />
             </main>
           </SidebarProvider>
+
+          <GoogleAnalytics />
         </StrictMode>
       </body>
     </html>
