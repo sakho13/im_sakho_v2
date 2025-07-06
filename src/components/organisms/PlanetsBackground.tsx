@@ -5,7 +5,7 @@ import { AnimPlanet } from "@/components/atoms/animation/AnimPlanet"
 import { AnimBase } from "@/components/atoms/animation/AnimBase"
 
 export function PlanetsBackground() {
-  const requestRef = useRef<number>()
+  const requestRef = useRef<number>(0)
   const posRef = useRef({ x: 200, y: 0 })
   const velRef = useRef({ x: 0, y: -1 })
   const [, setTick] = useState(0)
@@ -37,14 +37,15 @@ export function PlanetsBackground() {
   }, [])
 
   return (
-    <div className="pointer-events-none fixed left-0 top-0 -z-10 h-full w-full">
-      <div className="relative h-full w-full">
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+    <div className='pointer-events-none fixed left-0 top-0 -z-10 h-full w-full'>
+      <div className='relative h-full w-full'>
+        <div className='absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2'>
           <AnimBase ox={70} oy={70}>
             <AnimPlanet size={140} />
           </AnimBase>
+
           <AnimBase x={posRef.current.x} y={posRef.current.y} ox={50} oy={50}>
-            <AnimPlanet size={100} baseColor="#f9d878" />
+            <AnimPlanet size={100} baseColor='#f9d878' />
           </AnimBase>
         </div>
       </div>
