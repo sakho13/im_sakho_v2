@@ -1,6 +1,6 @@
 "use client"
 
-import { BookText, Gavel, Wrench } from "lucide-react"
+import { BookText, EqualApproximatelyIcon, Gavel, Wrench } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { event } from "@/lib/gtag"
@@ -68,6 +68,15 @@ export function SidebarBody() {
                   >
                     <Gavel />
                     <span>Tools</span>
+                  </a>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <a href={"/calculates"}>
+                    <EqualApproximatelyIcon />
+                    <span>Calculates</span>
                   </a>
                 </SidebarMenuButton>
               </SidebarMenuItem>
