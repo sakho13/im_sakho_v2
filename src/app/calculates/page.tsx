@@ -1,15 +1,14 @@
 import { TopicListViewer } from "@/components/molecules/TopicListViewer"
 import { SimpleTemplate } from "@/components/templates/SimpleTemplate"
-import { Button } from "@/components/ui/button"
 import { CardTitle } from "@/components/ui/card"
 import { OrbitIcon } from "lucide-react"
-import Link from "next/link"
 
 type ToolType = {
   id: string
   icon: React.ReactNode
   name: string
   description: string
+  url: string | null
 }
 
 export default function Page() {
@@ -19,6 +18,7 @@ export default function Page() {
       icon: <OrbitIcon />,
       name: "1次元調和位相空間",
       description: "1次元の調和振動子の位相空間を可視化します。",
+      url: "/calculates/1dim-harmonic-phase-space",
     },
   ]
 
@@ -33,11 +33,6 @@ export default function Page() {
           </CardTitle>
         )}
         renderBody={(tool) => tool.description}
-        renderFooter={(tool) => (
-          <Button>
-            <Link href={`/calculates/${tool.id}`}>Link</Link>
-          </Button>
-        )}
       />
     </SimpleTemplate>
   )
