@@ -1,15 +1,14 @@
 import { TopicListViewer } from "@/components/molecules/TopicListViewer"
 import { SimpleTemplate } from "@/components/templates/SimpleTemplate"
-import { Button } from "@/components/ui/button"
 import { CardTitle } from "@/components/ui/card"
 import { BracesIcon, IterationCcw } from "lucide-react"
-import Link from "next/link"
 
 type ToolType = {
   id: string
   icon: React.ReactNode
   name: string
   description: string
+  url: string | null
 }
 
 export default function Page() {
@@ -19,18 +18,21 @@ export default function Page() {
       icon: <IterationCcw />,
       name: "URL encode",
       description: "encodes a string to be used in a URL",
+      url: "/tools/url-encode",
     },
     {
       id: "reformat-json",
       icon: <BracesIcon />,
       name: "Reformat JSON",
       description: "reformat JSON text with a specified space",
+      url: "/tools/reformat-json",
     },
     {
       id: "convert-json-yaml",
       icon: <BracesIcon />,
       name: "Convert JSON ↔ YAML",
       description: "convert JSON to YAML or YAML to JSON",
+      url: "/tools/convert-json-yaml",
     },
   ]
 
@@ -45,11 +47,6 @@ export default function Page() {
           </CardTitle>
         )}
         renderBody={(tool) => tool.description}
-        renderFooter={(tool) => (
-          <Button>
-            <Link href={`/tools/${tool.id}`}>Link</Link>
-          </Button>
-        )}
       />
     </SimpleTemplate>
   )
