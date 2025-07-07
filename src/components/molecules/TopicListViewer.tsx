@@ -1,7 +1,10 @@
-import { Card, CardContent, CardFooter, CardHeader } from "../ui/card"
+import Link from "next/link"
+import { Card, CardContent, CardHeader } from "../ui/card"
+import { joinCN } from "@/lib/functions/joinCN"
 
 type TopicBase = {
   id: string | number
+  url: string | null
 }
 
 type Props<T extends TopicBase> = {
@@ -15,13 +18,17 @@ export function TopicListViewer<T extends TopicBase>({
   list,
   renderHeader,
   renderBody,
-  renderFooter,
 }: Props<T>) {
   return (
     <div className='grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-2'>
       {list.map((item) => (
-        <div key={item.id}>
-          <Card>
+        <Link key={item.id} href={item.url || "#"}>
+          <Card
+            className={joinCN(
+              "duration-300",
+              item.url ? "hover:shadow-lg transition-shadow" : "cursor-default",
+            )}
+          >
             {renderHeader ? (
               <CardHeader>{renderHeader(item)}</CardHeader>
             ) : null}
@@ -30,13 +37,8 @@ export function TopicListViewer<T extends TopicBase>({
                 {renderBody(item)}
               </CardContent>
             ) : null}
-            {renderFooter ? (
-              <CardFooter className='flex justify-end'>
-                {renderFooter(item)}
-              </CardFooter>
-            ) : null}
           </Card>
-        </div>
+        </Link>
       ))}
     </div>
   )

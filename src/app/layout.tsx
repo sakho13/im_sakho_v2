@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/sidebar"
 import { Toaster } from "@/components/ui/sonner"
 import { GoogleAnalytics } from "@/components/molecules/GoogleAnalytics"
+import { PlanetsBackground } from "@/components/organisms/PlanetsBackground"
 import { SidebarBody } from "@/components/organisms/SidebarBody"
 import { GA_ID } from "@/lib/gtag"
 import "./globals.css"
@@ -70,6 +71,7 @@ export default function RootLayout({
         className={`h-screen w-screen overflow-y-auto overflow-x-hidden font-mono`}
       >
         <StrictMode>
+          <PlanetsBackground />
           <SidebarProvider>
             <Sidebar>
               <SidebarBody />
