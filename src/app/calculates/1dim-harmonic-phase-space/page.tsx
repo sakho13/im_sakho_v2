@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { useCallback, useMemo, useState } from "react"
 import {
   CartesianGrid,
   ResponsiveContainer,
@@ -16,6 +16,7 @@ import { Slider } from "@/components/ui/slider"
 
 export default function Page() {
   const [m, setM] = useState(1)
+  const [k, setK] = useState(1)
   const [dt, setDt] = useState(0.02)
   const [steps, setSteps] = useState(400)
 
@@ -23,6 +24,8 @@ export default function Page() {
 
   // const [q, setQ] = useState(q0)
   // const [p, setP] = useState(p0)
+
+  const dVdq = useCallback((q: number): number => k * q, [k])
 
   const data = useMemo(() => {
     const phase: { q: number; p: number }[] = []
@@ -44,15 +47,11 @@ export default function Page() {
       p = pNew
     }
     return phase
-  }, [q0, p0, dt, m, steps])
+  }, [q0, p0, dt, m, steps, dVdq])
 
   // function potential(q: number): number {
   //   return 0.5 * q ** 2
   // }
-
-  function dVdq(q: number): number {
-    return q
-  }
 
   const { html } = useConvertMd({
     md: content,
@@ -76,6 +75,18 @@ export default function Page() {
               max={10}
               step={0.1}
               onValueChange={([value]) => setM(value)}
+              className='my-2 mx-2'
+            />
+          </div>
+
+          <div>
+            <label className='text-sm'>定数: {k} N/m</label>
+            <Slider
+              value={[k]}
+              min={0.1}
+              max={10}
+              step={0.1}
+              onValueChange={([value]) => setK(value)}
               className='my-2 mx-2'
             />
           </div>
@@ -150,7 +161,7 @@ $$
 $$
 
 $$
-\\dot{p} = -\\frac{\\partial H}{\\partial q} = -kq = - U'(q) \\tag{2}
+\\dot{p} = -\\frac{\\partial H}{\\partial q} = -kq \\tag{2}
 $$
 
 ## 数値解法
@@ -158,11 +169,11 @@ $$
 正準運動方程式 (1),(2) をそれぞれ離散化する。
 
 $$
-\\frac{q_{n+1} - q_{n}}{\\delta t} = \\frac{p_{n}}{m} \\implies q_{n+1} = q_{n} + \\frac{p_{n}}{m} \\delta t \\tag{3}
+\\frac{q_{n+1} - q_{n}}{\\varDelta t} = \\frac{p_{n}}{m} \\implies q_{n+1} = q_{n} + \\frac{p_{n}}{m} \\varDelta t \\tag{3}
 $$
 
 $$
-\\frac{p_{n+1} - p_{n}}{\\delta t} = - k q_{n} \\implies p_{n+1} = p_{n} - k q_{n} \\delta t \\tag{4}
+\\frac{p_{n+1} - p_{n}}{\\varDelta t} = - k q_{n} \\implies p_{n+1} = p_{n} - k q_{n} \\varDelta t \\tag{4}
 $$
 
 つまり、$n+1$ステップは $q_{n+1} = q_{n+1}(q_{n}, p_{n}), p_{n+1} = p_{n+1}(q_{n}, p_{n})$ と表せる。
@@ -170,19 +181,19 @@ $$
 ここで、半ステップ状態の運動量 $p_{n+1/2}$ を導入する。
 
 $$
-p_{n+1/2} = p_{n} - \\frac{k}{2} q_{n} \\delta t \\tag{5}
+p_{n+1/2} = p_{n} - \\frac{k}{2} q_{n} \\varDelta t \\tag{5}
 $$
 
 半ステップ運動量を使い、位置と運動量を更新する。
 
 $$
-q_{n+1} = q_{n} + \\frac{p_{n+1/2}}{m} \\delta t \\tag{6}
+q_{n+1} = q_{n} + \\frac{p_{n+1/2}}{m} \\varDelta t \\tag{6}
 $$
 
 $$
-p_{n+1} = p_{n+1/2} - \\frac{k}{2} q_{n+1} \\delta t \\tag{7}
+p_{n+1} = p_{n+1/2} - \\frac{k}{2} q_{n+1} \\varDelta t \\tag{7}
 $$
 
-## 保存量の確認
-
+このアルゴリズムに基づいて、位相空間を数値的に解く。
+ステップ数の増加に伴っても楕円軌道が保たれることを確認できる。
 `
