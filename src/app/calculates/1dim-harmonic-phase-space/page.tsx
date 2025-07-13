@@ -38,7 +38,7 @@ export default function Page() {
       // 位置更新
       const qNew = q + (pHalf / m) * dt
       // 完全ステップで運動量更新
-      const pNew = pHalf - dVdq(qNew) * dt
+      const pNew = pHalf - dVdq(qNew) * (dt / 2)
 
       phase.push({ q: qNew, p: pNew })
 
