@@ -1,18 +1,25 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
+import { usePathname } from "next/navigation"
 import { AnimPlanet } from "@/components/atoms/animation/AnimPlanet"
 import { AnimBase } from "@/components/atoms/animation/AnimBase"
+import { joinCN } from "@/lib/functions/joinCN"
 
 export function PlanetsBackground() {
+  const pathname = usePathname()
+
   const requestRef = useRef<number>(0)
-  const posRef = useRef({ x: 400, y: 0 })
-  const velRef = useRef({ x: 0, y: -1.4 })
+  const posRef = useRef({ x: 400, y: 10 })
+  const velRef = useRef({ x: 0, y: -1.3 })
 
   const rotateSumRef = useRef(0)
   const rotatePlanetRef = useRef(0)
 
   const [, setTick] = useState(0)
+
+  // トップページ以外はこのアニメーションを薄くする
+  const isTop = useMemo(() => pathname === "/", [pathname])
 
   useEffect(() => {
     const dt = 1
@@ -45,7 +52,12 @@ export function PlanetsBackground() {
   return (
     <div className='pointer-events-none fixed left-0 top-0 -z-10 h-full w-full'>
       <div className='relative h-full w-full'>
-        <div className='absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2'>
+        <div
+          className={joinCN(
+            "absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2",
+            isTop ? "opacity-100" : "opacity-20",
+          )}
+        >
           <AnimBase ox={70} oy={70} rotation={rotateSumRef.current}>
             <AnimPlanet size={150} />
           </AnimBase>
