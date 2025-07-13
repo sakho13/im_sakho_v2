@@ -10,8 +10,8 @@ export function PlanetsBackground() {
   const pathname = usePathname()
 
   const requestRef = useRef<number>(0)
-  const posRef = useRef({ x: 400, y: 0 })
-  const velRef = useRef({ x: 0, y: -1.4 })
+  const posRef = useRef({ x: 400, y: 10 })
+  const velRef = useRef({ x: 0, y: -1.3 })
 
   const rotateSumRef = useRef(0)
   const rotatePlanetRef = useRef(0)
