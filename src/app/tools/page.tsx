@@ -1,7 +1,7 @@
 import { TopicListViewer } from "@/components/molecules/TopicListViewer"
 import { SimpleTemplate } from "@/components/templates/SimpleTemplate"
 import { CardTitle } from "@/components/ui/card"
-import { BracesIcon, IterationCcw } from "lucide-react"
+import { BracesIcon, IterationCcw, Type } from "lucide-react"
 
 type ToolType = {
   id: string
@@ -33,6 +33,13 @@ export default function Page() {
       name: "Convert JSON ↔ YAML",
       description: "convert JSON to YAML or YAML to JSON",
       url: "/tools/convert-json-yaml",
+    },
+    {
+      id: "text-tips",
+      icon: <Type />,
+      name: "Text Tips",
+      description: "analyze text with character count, space count, line break removal, and text reversal",
+      url: "/tools/text/tips",
     },
   ]
 
