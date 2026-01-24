@@ -1,10 +1,12 @@
+import { Metadata, ResolvingMetadata } from "next"
+import { renderToString } from "katex"
+import { load as cheerioLoad } from "cheerio"
 import { SimpleTemplate } from "@/components/templates/SimpleTemplate"
 import { microCMSClient } from "@/lib/microcms"
 import { DateUtility } from "@/lib/utilities/DateUtility"
 import { BlogInfo } from "@/types/blog"
-import { renderToString } from "katex"
-import { load as cheerioLoad } from "cheerio"
 import post_style from "./post_style.module.scss"
+import { APP_NAME } from "@/statics/statics"
 
 type Props = {
   params: Promise<{ slug: string }>
@@ -43,6 +45,32 @@ export default async function Page({ params }: Props) {
       </div>
     </SimpleTemplate>
   )
+}
+
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  const { slug } = await params
+
+  const content = await _fetchPost(slug)
+
+  const previousImages = (await parent).openGraph?.images || []
+
+  return {
+    title: `${APP_NAME} | ${content!.title}`,
+    description: content?.content.replace(/<[^>]+>/g, "").slice(0, 160) || "",
+    keywords: [
+      "ブログ",
+      "記事",
+      "Blog",
+      "Article",
+      ...content!.category.map((cat) => cat.name),
+    ],
+    openGraph: {
+      images: [...previousImages],
+    },
+  }
 }
 
 async function _fetchPost(contentId: string): Promise<BlogInfo | null> {
