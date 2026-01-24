@@ -48,8 +48,8 @@ const TOOLS: ToolType[] = [
 export const metadata: Metadata = {
   title: `${APP_NAME} | ツール一覧`,
   description:
-    "ツール一覧ページです。" +
-    [...TOOLS.map((tool) => tool.description)].join(", "),
+    "ツール一覧ページです。, " +
+    TOOLS.map((tool) => tool.description).join(", "),
   keywords: ["ツール", "Tools", "Utility", ...TOOLS.map((tool) => tool.name)],
 }
 
