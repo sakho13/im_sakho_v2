@@ -1,3 +1,6 @@
+import { Metadata } from "next"
+import Link from "next/link"
+import { GetRequest, MicroCMSListResponse } from "microcms-js-sdk"
 import { SimpleTemplate } from "@/components/templates/SimpleTemplate"
 import {
   Card,
@@ -8,12 +11,17 @@ import {
 } from "@/components/ui/card"
 import { microCMSClient } from "@/lib/microcms"
 import { DateUtility } from "@/lib/utilities/DateUtility"
+import { APP_NAME } from "@/statics/statics"
 import { Blog, BlogInfo } from "@/types/blog"
 import { Post } from "@/types/post"
-import { GetRequest, MicroCMSListResponse } from "microcms-js-sdk"
-import Link from "next/link"
 
 export const revalidate = 3600
+
+export const metadata: Metadata = {
+  title: `${APP_NAME} | ブログ記事一覧`,
+  description: "SaKhoのブログ記事一覧ページです。",
+  keywords: ["ブログ", "記事", "Blog", "Article"],
+}
 
 export default async function BlogPage() {
   const blogs = await _fetchPosts()
