@@ -35,5 +35,5 @@ jobs:
         working-directory: ./
         run: npm run build
         env:
-          SERVICE_DOMAIN: ${{ env.SERVICE_DOMAIN }}
-          API_KEY: ${{ env.API_KEY }}
+          SERVICE_DOMAIN: ${{ secrets.SERVICE_DOMAIN }}
+          API_KEY: ${{ secrets.API_KEY }}
