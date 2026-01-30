@@ -1,9 +1,5 @@
 name: Build Test
 
-env:
-  SERVICE_DOMAIN: ${{ secrets.SERVICE_DOMAIN }}
-  API_KEY: ${{ secrets.API_KEY }}
-
 on:
   pull_request:
     types: [opened, reopened, synchronize, ready_for_review]
@@ -38,3 +34,6 @@ jobs:
       - name: Run builds
         working-directory: ./
         run: npm run build
+        env:
+          SERVICE_DOMAIN: ${{ env.SERVICE_DOMAIN }}
+          API_KEY: ${{ env.API_KEY }}
