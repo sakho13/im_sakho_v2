@@ -54,7 +54,7 @@
     "@types/gtag.js": "0.0.20",
     "@types/jest": "30.0.0",
     "@types/js-yaml": "4.0.9",
-    "@types/node": "20",
+    "@types/node": "25",
     "@types/react": "19.2.2",
     "@types/react-dom": "19.2.2",
     "baseline-browser-mapping": "2.9.19",
