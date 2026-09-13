@@ -1,6 +1,12 @@
 "use client"
 
-import { BookText, EqualApproximatelyIcon, Gavel, Wrench } from "lucide-react"
+import {
+  BookText,
+  EqualApproximatelyIcon,
+  Gavel,
+  Music2Icon,
+  Wrench,
+} from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { event } from "@/lib/gtag"
@@ -77,6 +83,25 @@ export function SidebarBody() {
                   <a href={"/calculates"}>
                     <EqualApproximatelyIcon />
                     <span>Calculates</span>
+                  </a>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <a
+                    onClick={() => {
+                      event({
+                        action: "click",
+                        category: "sidebar",
+                        label: "hobbies",
+                      })
+                      router.push("/hobbies")
+                    }}
+                    className='hover:cursor-pointer'
+                  >
+                    <Music2Icon />
+                    <span>Hobbies</span>
                   </a>
                 </SidebarMenuButton>
               </SidebarMenuItem>
