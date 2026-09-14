@@ -56,17 +56,6 @@ export function useKanteleScore() {
     })
   }, [])
 
-  const placeNote = useCallback((string: number, step: number) => {
-    setScore((prev) => {
-      const exists = prev.notes.some(
-        (note) => note.string === string && note.step === step,
-      )
-      if (exists) return prev
-
-      return { ...prev, notes: [...prev.notes, { string, step }] }
-    })
-  }, [])
-
   const setTuningNote = useCallback((index: number, note: string) => {
     setScore((prev) => {
       const tuning = [...prev.tuning]
@@ -154,7 +143,6 @@ export function useKanteleScore() {
   return {
     score,
     toggleNote,
-    placeNote,
     setTuningNote,
     addString,
     removeString,

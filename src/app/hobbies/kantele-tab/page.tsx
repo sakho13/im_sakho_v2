@@ -2,7 +2,6 @@
 
 import { SimpleTemplate } from "@/components/templates/SimpleTemplate"
 import { KanteleGrid } from "@/components/organisms/kantele/KanteleGrid"
-import { KanteleChordStamp } from "@/components/organisms/kantele/KanteleChordStamp"
 import { KanteleTuningControls } from "@/components/organisms/kantele/KanteleTuningControls"
 import { KanteleTransportControls } from "@/components/organisms/kantele/KanteleTransportControls"
 import { KanteleFileControls } from "@/components/organisms/kantele/KanteleFileControls"
@@ -14,7 +13,6 @@ export default function Page() {
   const {
     score,
     toggleNote,
-    placeNote,
     setTuningNote,
     addString,
     removeString,
@@ -67,16 +65,6 @@ export default function Page() {
           onChangeLength={setLength}
           onChangeStepsPerBeat={setStepsPerBeat}
           onTogglePlay={togglePlay}
-        />
-      </div>
-
-      <div className='mx-4 mt-4'>
-        <p className='pb-2 font-bold'>コードスタンプ</p>
-        <KanteleChordStamp
-          tuning={score.tuning}
-          length={score.length}
-          stringOrder={stringOrder}
-          onPlaceNote={placeNote}
         />
       </div>
 

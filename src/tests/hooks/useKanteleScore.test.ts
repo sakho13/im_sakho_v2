@@ -38,20 +38,6 @@ describe("hooks/useKanteleScore", () => {
     expect(result.current.score.notes).toEqual([])
   })
 
-  test("placeNoteはノートが無ければ配置し、既にあれば何もしない(トグルしない)", () => {
-    const { result } = renderHook(() => useKanteleScore())
-
-    act(() => {
-      result.current.placeNote(0, 0)
-    })
-    expect(result.current.score.notes).toEqual([{ string: 0, step: 0 }])
-
-    act(() => {
-      result.current.placeNote(0, 0)
-    })
-    expect(result.current.score.notes).toEqual([{ string: 0, step: 0 }])
-  })
-
   test("setTuningNoteで指定した弦だけ音名が変わる", () => {
     const { result } = renderHook(() => useKanteleScore())
 
