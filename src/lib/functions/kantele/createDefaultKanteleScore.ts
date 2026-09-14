@@ -14,6 +14,7 @@ export function createDefaultKanteleScore(): KanteleScore {
     title: "無題のタブ譜",
     bpm: 100,
     stepsPerBeat: 2,
+    beatsPerMeasure: 4,
     length: 16,
     tuning: [...(defaultPreset?.tuning ?? KANTELE_TUNING_PRESETS[0].tuning)],
     notes: [],

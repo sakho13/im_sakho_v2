@@ -96,6 +96,16 @@ describe("hooks/useKanteleScore", () => {
     expect(result.current.score.title).toBe("マイソング")
   })
 
+  test("setBeatsPerMeasureで拍子が変わる", () => {
+    const { result } = renderHook(() => useKanteleScore())
+
+    act(() => {
+      result.current.setBeatsPerMeasure(3)
+    })
+
+    expect(result.current.score.beatsPerMeasure).toBe(3)
+  })
+
   test("setLengthで縮小すると範囲外のノートが削除される", () => {
     const { result } = renderHook(() => useKanteleScore())
 

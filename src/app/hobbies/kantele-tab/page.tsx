@@ -19,6 +19,7 @@ export default function Page() {
     applyTuningPreset,
     setBpm,
     setStepsPerBeat,
+    setBeatsPerMeasure,
     setLength,
     setTitle,
     exportYaml,
@@ -60,10 +61,12 @@ export default function Page() {
           bpm={score.bpm}
           length={score.length}
           stepsPerBeat={score.stepsPerBeat}
+          beatsPerMeasure={score.beatsPerMeasure}
           isPlaying={isPlaying}
           onChangeBpm={setBpm}
           onChangeLength={setLength}
           onChangeStepsPerBeat={setStepsPerBeat}
+          onChangeBeatsPerMeasure={setBeatsPerMeasure}
           onTogglePlay={togglePlay}
         />
       </div>
@@ -77,6 +80,7 @@ export default function Page() {
           tuning={score.tuning}
           length={score.length}
           stepsPerBeat={score.stepsPerBeat}
+          beatsPerMeasure={score.beatsPerMeasure}
           notes={score.notes}
           currentStep={currentStep}
           stringOrder={stringOrder}

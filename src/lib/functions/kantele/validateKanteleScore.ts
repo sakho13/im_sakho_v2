@@ -7,6 +7,8 @@ const MIN_BPM = 20
 const MAX_BPM = 300
 const MIN_STEPS_PER_BEAT = 1
 const MAX_STEPS_PER_BEAT = 8
+const MIN_BEATS_PER_MEASURE = 1
+const MAX_BEATS_PER_MEASURE = 16
 const MIN_LENGTH = 1
 const MAX_LENGTH = 512
 
@@ -59,6 +61,18 @@ export function validateKanteleScore(data: unknown): KanteleScore {
     )
   }
 
+  // 本フィールド追加前に書き出されたYAMLとの互換性のため、未指定なら4拍子扱いにする
+  if (
+    data.beatsPerMeasure !== undefined &&
+    !isIntegerInRange(data.beatsPerMeasure, MIN_BEATS_PER_MEASURE, MAX_BEATS_PER_MEASURE)
+  ) {
+    throw new Error(
+      `beatsPerMeasure は ${MIN_BEATS_PER_MEASURE}〜${MAX_BEATS_PER_MEASURE} の整数で指定してください`,
+    )
+  }
+  const beatsPerMeasure =
+    typeof data.beatsPerMeasure === "number" ? data.beatsPerMeasure : 4
+
   if (!isIntegerInRange(data.length, MIN_LENGTH, MAX_LENGTH)) {
     throw new Error(`length は ${MIN_LENGTH}〜${MAX_LENGTH} の整数で指定してください`)
   }
@@ -86,6 +100,7 @@ export function validateKanteleScore(data: unknown): KanteleScore {
     title,
     bpm: data.bpm,
     stepsPerBeat: data.stepsPerBeat,
+    beatsPerMeasure,
     length,
     tuning: tuning as string[],
     notes: notes as KanteleScore["notes"],

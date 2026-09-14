@@ -9,6 +9,7 @@ version: 1
 title: "Untitled Kantele Tab"
 bpm: 100
 stepsPerBeat: 2
+beatsPerMeasure: 4
 length: 16
 tuning:
   - G4
@@ -41,6 +42,7 @@ describe("lib/functions/kantele/kanteleScoreYaml", () => {
       title: "Untitled Kantele Tab",
       bpm: 100,
       stepsPerBeat: 2,
+      beatsPerMeasure: 4,
       length: 16,
       tuning: ["G4", "A4", "C5", "D5", "E5"],
       notes: [
@@ -62,5 +64,10 @@ describe("lib/functions/kantele/kanteleScoreYaml", () => {
         EXAMPLE_YAML.replace("  - E5\n", ""),
       ),
     ).toThrow()
+  })
+
+  test("beatsPerMeasure追加前の古いYAMLも4拍子として読み込める", () => {
+    const oldFormatYaml = EXAMPLE_YAML.replace("beatsPerMeasure: 4\n", "")
+    expect(parseKanteleScoreFromYaml(oldFormatYaml).beatsPerMeasure).toBe(4)
   })
 })

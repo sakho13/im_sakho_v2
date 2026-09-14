@@ -1,6 +1,8 @@
 import {
+  beatNumberInMeasure,
   calcStepsPerLine,
   FALLBACK_STEPS_PER_LINE,
+  isMeasureStart,
   splitStepsIntoLines,
 } from "@/lib/functions/kantele/kanteleGridLines"
 
@@ -13,6 +15,7 @@ describe("lib/functions/kantele/kanteleGridLines", () => {
           availableWidth: 360,
           cellWidth: 36,
           stepsPerBeat: 2,
+          beatsPerMeasure: 1,
           maxStepsPerLine: 64,
         }),
       ).toBe(10)
@@ -25,6 +28,7 @@ describe("lib/functions/kantele/kanteleGridLines", () => {
           availableWidth: 396,
           cellWidth: 36,
           stepsPerBeat: 4,
+          beatsPerMeasure: 1,
           maxStepsPerLine: 64,
         }),
       ).toBe(8)
@@ -36,6 +40,7 @@ describe("lib/functions/kantele/kanteleGridLines", () => {
           availableWidth: 2000,
           cellWidth: 36,
           stepsPerBeat: 2,
+          beatsPerMeasure: 1,
           maxStepsPerLine: 16,
         }),
       ).toBe(16)
@@ -47,6 +52,7 @@ describe("lib/functions/kantele/kanteleGridLines", () => {
           availableWidth: 10,
           cellWidth: 36,
           stepsPerBeat: 3,
+          beatsPerMeasure: 1,
           maxStepsPerLine: 64,
         }),
       ).toBe(3)
@@ -58,6 +64,7 @@ describe("lib/functions/kantele/kanteleGridLines", () => {
           availableWidth: 0,
           cellWidth: 36,
           stepsPerBeat: 2,
+          beatsPerMeasure: 1,
           maxStepsPerLine: 64,
         }),
       ).toBe(FALLBACK_STEPS_PER_LINE)
@@ -67,9 +74,60 @@ describe("lib/functions/kantele/kanteleGridLines", () => {
           availableWidth: Number.NaN,
           cellWidth: 36,
           stepsPerBeat: 2,
+          beatsPerMeasure: 1,
           maxStepsPerLine: 64,
         }),
       ).toBe(FALLBACK_STEPS_PER_LINE)
+    })
+
+    test("1小節まるごと入るなら小節単位で折り返す(3拍子・2ステップ/拍=6ステップ/小節)", () => {
+      // 442px / 36px = 12マス → 2小節ぶん(12ステップ)
+      expect(
+        calcStepsPerLine({
+          availableWidth: 442,
+          cellWidth: 36,
+          stepsPerBeat: 2,
+          beatsPerMeasure: 3,
+          maxStepsPerLine: 64,
+        }),
+      ).toBe(12)
+    })
+
+    test("小節がまるごと入らない場合は拍単位に切り下げる", () => {
+      // 190px / 36px = 5マス。6ステップ/小節に届かないので拍(2ステップ)単位で2拍ぶん
+      expect(
+        calcStepsPerLine({
+          availableWidth: 190,
+          cellWidth: 36,
+          stepsPerBeat: 2,
+          beatsPerMeasure: 3,
+          maxStepsPerLine: 64,
+        }),
+      ).toBe(4)
+    })
+  })
+
+  describe("beatNumberInMeasure", () => {
+    test("3拍子(2ステップ/拍)なら 1,2,3,1,2,3... と数え直す", () => {
+      expect(beatNumberInMeasure(0, 2, 3)).toBe(1)
+      expect(beatNumberInMeasure(2, 2, 3)).toBe(2)
+      expect(beatNumberInMeasure(4, 2, 3)).toBe(3)
+      expect(beatNumberInMeasure(6, 2, 3)).toBe(1)
+    })
+
+    test("拍の開始ステップでなければnull", () => {
+      expect(beatNumberInMeasure(1, 2, 3)).toBeNull()
+      expect(beatNumberInMeasure(3, 2, 3)).toBeNull()
+    })
+  })
+
+  describe("isMeasureStart", () => {
+    test("小節の先頭ステップだけtrue", () => {
+      expect(isMeasureStart(0, 2, 3)).toBe(true)
+      expect(isMeasureStart(6, 2, 3)).toBe(true)
+      expect(isMeasureStart(2, 2, 3)).toBe(false)
+      expect(isMeasureStart(4, 2, 3)).toBe(false)
+      expect(isMeasureStart(1, 2, 3)).toBe(false)
     })
   })
 

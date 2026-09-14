@@ -8,10 +8,12 @@ type Props = {
   bpm: number
   length: number
   stepsPerBeat: number
+  beatsPerMeasure: number
   isPlaying: boolean
   onChangeBpm: (bpm: number) => void
   onChangeLength: (length: number) => void
   onChangeStepsPerBeat: (stepsPerBeat: number) => void
+  onChangeBeatsPerMeasure: (beatsPerMeasure: number) => void
   onTogglePlay: () => void
 }
 
@@ -19,10 +21,12 @@ export function KanteleTransportControls({
   bpm,
   length,
   stepsPerBeat,
+  beatsPerMeasure,
   isPlaying,
   onChangeBpm,
   onChangeLength,
   onChangeStepsPerBeat,
+  onChangeBeatsPerMeasure,
   onTogglePlay,
 }: Props) {
   return (
@@ -53,6 +57,21 @@ export function KanteleTransportControls({
           max={8}
           step={1}
           onValueChange={(v) => onChangeStepsPerBeat(v[0])}
+        />
+      </div>
+
+      <div>
+        <p className='pb-2 text-sm font-bold'>拍子(1小節の拍数): {beatsPerMeasure}拍子</p>
+        <p className='pb-2 text-xs text-muted-foreground'>
+          例: 3/4拍子や3/8拍子は「3拍子」、2/4拍子は「2拍子」を選んでください。
+          何分音符が1拍かはこのツールでは区別しません。
+        </p>
+        <Slider
+          value={[beatsPerMeasure]}
+          min={1}
+          max={12}
+          step={1}
+          onValueChange={(v) => onChangeBeatsPerMeasure(v[0])}
         />
       </div>
 

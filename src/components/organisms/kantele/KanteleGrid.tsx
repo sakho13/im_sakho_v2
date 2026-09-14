@@ -5,7 +5,9 @@ import { cn } from "@/lib/utils"
 import { KanteleNote } from "@/types/kantele"
 import { useElementWidth } from "@/hooks/useElementWidth"
 import {
+  beatNumberInMeasure,
   calcStepsPerLine,
+  isMeasureStart,
   splitStepsIntoLines,
 } from "@/lib/functions/kantele/kanteleGridLines"
 import {
@@ -21,6 +23,7 @@ type Props = {
   tuning: string[]
   length: number
   stepsPerBeat: number
+  beatsPerMeasure: number
   notes: KanteleNote[]
   currentStep: number | null
   stringOrder: KanteleStringOrder
@@ -31,6 +34,7 @@ export function KanteleGrid({
   tuning,
   length,
   stepsPerBeat,
+  beatsPerMeasure,
   notes,
   currentStep,
   stringOrder,
@@ -55,10 +59,11 @@ export function KanteleGrid({
       availableWidth: width - STRING_HEADER_WIDTH,
       cellWidth: CELL_WIDTH,
       stepsPerBeat,
+      beatsPerMeasure,
       maxStepsPerLine: length,
     })
     return splitStepsIntoLines(length, stepsPerLine)
-  }, [width, stepsPerBeat, length])
+  }, [width, stepsPerBeat, beatsPerMeasure, length])
 
   return (
     <div ref={ref} className='min-w-0 space-y-3'>
@@ -73,18 +78,28 @@ export function KanteleGrid({
                 {line.index + 1}段目
               </div>
               {line.steps.map((step) => {
-                const isBeatStart = step % stepsPerBeat === 0
+                const beatNumber = beatNumberInMeasure(
+                  step,
+                  stepsPerBeat,
+                  beatsPerMeasure,
+                )
+                const measureStart = isMeasureStart(
+                  step,
+                  stepsPerBeat,
+                  beatsPerMeasure,
+                )
 
                 return (
                   <div
                     key={step}
                     className={cn(
                       "shrink-0 py-1 text-center text-[10px] text-muted-foreground",
-                      isBeatStart && "font-bold text-foreground",
+                      beatNumber !== null && "font-bold text-foreground",
+                      measureStart && "text-primary",
                     )}
                     style={{ width: CELL_WIDTH }}
                   >
-                    {isBeatStart ? step / stepsPerBeat + 1 : ""}
+                    {beatNumber ?? ""}
                   </div>
                 )
               })}
@@ -107,7 +122,14 @@ export function KanteleGrid({
                 {line.steps.map((step) => {
                   const isActive = activeCells.has(`${step}:${stringIndex}`)
                   const isCurrent = step === currentStep
-                  const isBeatStart = step % stepsPerBeat === 0
+                  const isBeatStart =
+                    beatNumberInMeasure(step, stepsPerBeat, beatsPerMeasure) !==
+                    null
+                  const measureStart = isMeasureStart(
+                    step,
+                    stepsPerBeat,
+                    beatsPerMeasure,
+                  )
 
                   return (
                     <button
@@ -119,6 +141,7 @@ export function KanteleGrid({
                       className={cn(
                         "relative h-9 shrink-0 border-l border-t border-l-border/50 transition-colors hover:bg-accent",
                         isBeatStart && "border-l-2 border-l-foreground/30",
+                        measureStart && "border-l-2 border-l-primary",
                         isCurrent && "bg-accent",
                       )}
                       style={{ width: CELL_WIDTH }}

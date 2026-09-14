@@ -11,6 +11,7 @@ function renderGrid(props: Partial<Parameters<typeof KanteleGrid>[0]> = {}) {
       tuning={TUNING}
       length={32}
       stepsPerBeat={2}
+      beatsPerMeasure={4}
       notes={[]}
       currentStep={null}
       stringOrder='bassBottom'

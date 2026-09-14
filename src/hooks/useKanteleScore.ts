@@ -107,6 +107,10 @@ export function useKanteleScore() {
     setScore((prev) => ({ ...prev, stepsPerBeat }))
   }, [])
 
+  const setBeatsPerMeasure = useCallback((beatsPerMeasure: number) => {
+    setScore((prev) => ({ ...prev, beatsPerMeasure }))
+  }, [])
+
   const setLength = useCallback((length: number) => {
     setScore((prev) => ({
       ...prev,
@@ -149,6 +153,7 @@ export function useKanteleScore() {
     applyTuningPreset,
     setBpm,
     setStepsPerBeat,
+    setBeatsPerMeasure,
     setLength,
     setTitle,
     exportYaml,

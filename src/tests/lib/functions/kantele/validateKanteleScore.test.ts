@@ -14,6 +14,7 @@ function buildValidScore(overrides: Record<string, unknown> = {}) {
     title: "テスト譜面",
     bpm: 100,
     stepsPerBeat: 2,
+    beatsPerMeasure: 4,
     length: 16,
     tuning: [...FIVE_STRING_TUNING],
     notes: [{ string: 0, step: 0 }],
@@ -79,6 +80,21 @@ describe("lib/functions/kantele/validateKanteleScore", () => {
       validateKanteleScore(
         buildValidScore({ notes: [{ string: 0, step: 16 }] }),
       ),
+    ).toThrow()
+  })
+
+  test("beatsPerMeasureが未指定なら4拍子として補完される(旧形式のYAMLとの互換性)", () => {
+    const score = buildValidScore()
+    delete (score as Record<string, unknown>).beatsPerMeasure
+    expect(validateKanteleScore(score).beatsPerMeasure).toBe(4)
+  })
+
+  test("beatsPerMeasureが範囲外だとthrow", () => {
+    expect(() =>
+      validateKanteleScore(buildValidScore({ beatsPerMeasure: 0 })),
+    ).toThrow()
+    expect(() =>
+      validateKanteleScore(buildValidScore({ beatsPerMeasure: 17 })),
     ).toThrow()
   })
 })
