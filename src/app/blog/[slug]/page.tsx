@@ -1,4 +1,5 @@
 import { Metadata, ResolvingMetadata } from "next"
+import { notFound } from "next/navigation"
 import { renderToString } from "katex"
 import { load as cheerioLoad } from "cheerio"
 import { SimpleTemplate } from "@/components/templates/SimpleTemplate"
@@ -19,13 +20,7 @@ export default async function Page({ params }: Props) {
 
   const blog = await _fetchPost(slug)
 
-  if (!blog) {
-    return (
-      <SimpleTemplate title='存在しないページ'>
-        <h1 className='text-red-600 text-2xl font-bold'>404 Not Found</h1>
-      </SimpleTemplate>
-    )
-  }
+  if (!blog) notFound()
 
   return (
     <SimpleTemplate title={blog.title}>
@@ -55,17 +50,21 @@ export async function generateMetadata(
 
   const content = await _fetchPost(slug)
 
+  if (!content) {
+    return { title: `${APP_NAME} | 存在しないページ` }
+  }
+
   const previousImages = (await parent).openGraph?.images || []
 
   return {
-    title: `${APP_NAME} | ${content!.title}`,
-    description: content?.content.replace(/<[^>]+>/g, "").slice(0, 160) || "",
+    title: `${APP_NAME} | ${content.title}`,
+    description: content.content.replace(/<[^>]+>/g, "").slice(0, 160),
     keywords: [
       "ブログ",
       "記事",
       "Blog",
       "Article",
-      ...content!.category.map((cat) => cat.name),
+      ...content.category.map((cat) => cat.name),
     ],
     openGraph: {
       images: [...previousImages],
