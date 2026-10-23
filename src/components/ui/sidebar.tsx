@@ -652,6 +652,7 @@ const SidebarMenuSkeleton = React.forwardRef<
 >(({ className, showIcon = false, ...props }, ref) => {
   // Random width between 50 to 90%.
   const width = React.useMemo(() => {
+    // eslint-disable-next-line react-hooks/purity -- スケルトン表示用の見た目だけのランダム幅で、初回のみ useMemo で固定している
     return `${Math.floor(Math.random() * 40) + 50}%`
   }, [])
 

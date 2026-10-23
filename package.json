@@ -13,7 +13,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
     "test": "jest"
   },
   "dependencies": {
@@ -47,7 +47,6 @@
     "tailwindcss-animate": "1.0.7"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "3",
     "@testing-library/dom": "10.4.1",
     "@testing-library/jest-dom": "6.9.1",
     "@testing-library/react": "16.3.2",

@@ -49,6 +49,8 @@ export function PlanetsBackground() {
     }
   }, [])
 
+  // requestAnimationFrame で更新した ref の値を setTick による再レンダー毎に描画へ反映する意図的な実装
+  /* eslint-disable react-hooks/refs */
   return (
     <div className='pointer-events-none fixed left-0 top-0 -z-10 h-full w-full'>
       <div className='relative h-full w-full'>
@@ -75,4 +77,5 @@ export function PlanetsBackground() {
       </div>
     </div>
   )
+  /* eslint-enable react-hooks/refs */
 }
