@@ -45,22 +45,22 @@ export default function RootLayout({
 
         <link
           rel='stylesheet'
-          href='https://cdn.jsdelivr.net/npm/katex@0.16.19/dist/katex.min.css'
-          integrity='sha384-7lU0muIg/i1plk7MgygDUp3/bNRA65orrBub4/OSWHECgwEsY83HaS1x3bljA/XV'
+          href='https://cdn.jsdelivr.net/npm/katex@0.18.2/dist/katex.min.css'
+          integrity='sha384-qArEAQvOPs1o7K1iAybhs66g8nYTXVt4VLOQ3abu+OMLJyPNfaH4Wpko0X2epHJ+'
           crossOrigin='anonymous'
         />
 
         <script
           defer
-          src='https://cdn.jsdelivr.net/npm/katex@0.16.19/dist/katex.min.js'
-          integrity='sha384-RdymN7NRJ+XoyeRY4185zXaxq9QWOOx3O7beyyrRK4KQZrPlCDQQpCu95FoCGPAE'
+          src='https://cdn.jsdelivr.net/npm/katex@0.18.2/dist/katex.min.js'
+          integrity='sha384-IHT6Yddb0KLCzZaxQ/so1j3xkJ8R6hOkCR06ma9NDHGn0Z4ClKcGtQ6qqsflRPxR'
           crossOrigin='anonymous'
         ></script>
 
         <script
           defer
-          src='https://cdn.jsdelivr.net/npm/katex@0.16.19/dist/contrib/auto-render.min.js'
-          integrity='sha384-hCXGrW6PitJEwbkoStFjeJxv+fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh'
+          src='https://cdn.jsdelivr.net/npm/katex@0.18.2/dist/contrib/auto-render.min.js'
+          integrity='sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz'
           crossOrigin='anonymous'
         >
           renderMathInElement(document.body)
