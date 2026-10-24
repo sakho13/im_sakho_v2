@@ -10,7 +10,12 @@ import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
-import { Sheet, SheetContent } from "@/components/ui/sheet"
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetTitle,
+} from "@/components/ui/sheet"
 import { Skeleton } from "@/components/ui/skeleton"
 import {
   Tooltip,
@@ -206,6 +211,10 @@ const Sidebar = React.forwardRef<
             }
             side={side}
           >
+            <SheetTitle className="sr-only">Sidebar</SheetTitle>
+            <SheetDescription className="sr-only">
+              Displays the mobile sidebar.
+            </SheetDescription>
             <div className="flex h-full w-full flex-col">{children}</div>
           </SheetContent>
         </Sheet>
@@ -652,6 +661,7 @@ const SidebarMenuSkeleton = React.forwardRef<
 >(({ className, showIcon = false, ...props }, ref) => {
   // Random width between 50 to 90%.
   const width = React.useMemo(() => {
+    // eslint-disable-next-line react-hooks/purity -- スケルトン表示用の見た目だけのランダム幅で、初回のみ useMemo で固定している
     return `${Math.floor(Math.random() * 40) + 50}%`
   }, [])
 

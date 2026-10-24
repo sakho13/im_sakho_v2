@@ -1,4 +1,4 @@
-FROM node:20.11.0-slim AS base
+FROM node:24.22.1-slim AS base
 
 
 FROM base AS deps
@@ -19,7 +19,7 @@ COPY . .
 RUN npm run build
 
 
-FROM node:20.11.0 AS runner
+FROM node:24.22.1 AS runner
 
 ENV NODE_ENV=production
 WORKDIR /app

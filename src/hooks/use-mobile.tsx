@@ -11,6 +11,7 @@ export function useIsMobile() {
       setIsMobile(window.innerWidth < MOBILE_BREAKPOINT)
     }
     mql.addEventListener("change", onChange)
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- マウント時に外部状態 (window 幅) の初期値を同期する
     setIsMobile(window.innerWidth < MOBILE_BREAKPOINT)
     return () => mql.removeEventListener("change", onChange)
   }, [])
