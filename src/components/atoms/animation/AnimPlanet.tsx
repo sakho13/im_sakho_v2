@@ -21,6 +21,8 @@ export function AnimPlanet({
   const [rnd, setRnd] = useState<string | null>(null)
 
   useEffect(() => {
+    // SSR とのハイドレーション不一致を避けるため、乱数 ID はマウント後にクライアントで生成する
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- マウント時に一度だけ実行する意図的な処理
     setRnd(`${Math.floor(Math.random() * 1000)}`)
   }, [])
 

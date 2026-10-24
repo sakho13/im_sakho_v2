@@ -14,6 +14,12 @@ describe("lib/utilities/DateUtility", () => {
       )
     })
 
+    test("UTCでは前日でもAsia/Tokyoの日付になる", () => {
+      expect(
+        DateUtility.convertISO8601ToFormattedDate("2025-05-27T15:30:00.000Z"),
+      ).toBe("2025年05月28日")
+    })
+
     test("異常系 適当な文字列", () => {
       expect(DateUtility.convertISO8601ToFormattedDate("invalid date")).toBe(
         "9999年12月31日",
